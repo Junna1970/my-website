@@ -54,7 +54,7 @@
   </table>
 
   <script>
-    const apiUrl = 'PASTE_YOUR_WEB_APP_URL_HERE'; // Ganti dengan URL Web App Anda
+    const apiUrl = 'https://script.google.com/u/0/home/projects/14GjtKfe9dNsqy0f3X99vmcbAPvofWlbeEoEMhh7T8U9tV1iDH3j32d4-/edit'; // Ganti dengan URL Web App Anda
 
     // Fungsi untuk mengambil dan menampilkan data berdasarkan pencarian
     function searchData() {
