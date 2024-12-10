@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pencarian Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    input {
+      padding: 8px;
+      width: 100%;
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pencarian Data Berdasarkan Nama</h1>
+  
+  <input type="text" id="search-box" placeholder="Masukkan Nama..." onkeyup="searchData()">
+  
+  <table id="result-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Jenis Kelamin</th>
+        <th>Usia</th>
+        <th>Kecamatan</th>
+        <th>Kelurahan</th>
+        <th>Alamat</th>
+        <th>RT</th>
+        <th>RW</th>
+        <th>TPS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Hasil pencarian akan ditampilkan di sini -->
+    </tbody>
+  </table>
+
+  <script>
+    const apiUrl = 'PASTE_YOUR_WEB_APP_URL_HERE'; // Ganti dengan URL Web App Anda
+
+    // Fungsi untuk mengambil dan menampilkan data berdasarkan pencarian
+    function searchData() {
+      const searchQuery = document.getElementById('search-box').value;
+      const url = `${apiUrl}?nama=${searchQuery}`; // URL dengan parameter 'nama'
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const tableBody = document.querySelector('#result-table tbody');
+          tableBody.innerHTML = ''; // Kosongkan tabel sebelum menampilkan hasil baru
+
+          if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="10">Tidak ditemukan data yang sesuai.</td></tr>';
+          } else {
+            data.forEach(item => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${item.No}</td>
+                <td>${item.NAMA}</td>
+                <td>${item["JENIS KELAMIN"]}</td>
+                <td>${item.USIA}</td>
+                <td>${item.KECAMATAN}</td>
+                <td>${item.KELURAHAN}</td>
+                <td>${item.ALAMAT}</td>
+                <td>${item.RT}</td>
+                <td>${item.RW}</td>
+                <td>${item.TPS}</td>
+              `;
+              tableBody.appendChild(row);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  </script>
+</body>
+</html>
